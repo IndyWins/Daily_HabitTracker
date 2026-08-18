@@ -31,7 +31,7 @@ struct AddNewHabitView: View {
                 Spacer()
                 
             }
-// HABIT DATA
+// NEW HABIT DATA ENTRY
             
             
             

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WeeklyCardView: View {
     
+    @ObservedObject var vm: HabitViewModel
     
     // Placeholder Data
     
@@ -22,8 +23,10 @@ struct WeeklyCardView: View {
             
             // Weekly Completions
             VStack {
-                Text("\(weeklyCompletedHabits)")
-                    .modifier(LargeNumberFontModifier())
+                Text("\(vm.habitsCompleted)")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.green)
                 
                 Text("Habits Compelted")
                     .multilineTextAlignment(.center)
@@ -70,5 +73,6 @@ struct WeeklyCardView: View {
 }
 
 #Preview {
-    WeeklyCardView()
+    let vm = HabitViewModel(service: MockHabitService())
+    WeeklyCardView(vm: vm)
 }

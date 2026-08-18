@@ -13,9 +13,12 @@ struct DailyView: View {
     // Imports All Data from DailyViewModel
     @StateObject private var vm = HabitViewModel(service: MockHabitService())
     
+    @State private var isSheetPresented: Bool = false
+    
     var body: some View {
         
         NavigationStack {
+            
             VStack {
                 
 // TITLE & WELCOME
@@ -31,9 +34,9 @@ struct DailyView: View {
                     Spacer()
                     
 // ADD NEW HABIT BUTTON NAVIGATION
-                    
-                    NavigationLink {
-                        // Add New Habit View
+            
+                    Button {
+                        isSheetPresented.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -52,7 +55,7 @@ struct DailyView: View {
                 DailyTaskListTable(vm:vm)
                 
                 NavigationLink {
-                    ProgressView()
+                    ProgressView(vm: vm)
                 } label: {
                     HStack {
                         Text("View Progress")
@@ -66,6 +69,9 @@ struct DailyView: View {
         }
         .task {
             await vm.loadHabits()
+        }
+        .sheet(isPresented: $isSheetPresented) {
+            AddNewHabitView()
         }
     }
 }

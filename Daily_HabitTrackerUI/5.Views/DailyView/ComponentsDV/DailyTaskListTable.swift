@@ -23,7 +23,7 @@ struct DailyTaskListTable: View {
             // SHOW LOADING SCREEN WHILST DATA LOADS
             if vm.isLoading {
                 Spacer()
-                ProgressView()
+                ProgressView(vm: vm)
                     .tint(.green)
                 Spacer()
                 

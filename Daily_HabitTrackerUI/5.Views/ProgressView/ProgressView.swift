@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProgressView: View {
     
+    @ObservedObject var vm: HabitViewModel
+    
     @State private var currentDayStreak: Int = 7
     
     var body: some View {
@@ -66,7 +68,7 @@ struct ProgressView: View {
                 
                 // This Week Card
                 
-                WeeklyCardView()
+                WeeklyCardView(vm:vm)
                 
                 
                 // RETURN TO DAILY VIEW NAVIGATION BUTTON
@@ -87,5 +89,6 @@ struct ProgressView: View {
 }
 
 #Preview {
-    ProgressView()
+    let vm = HabitViewModel(service: MockHabitService())
+    ProgressView(vm: vm)
 }
