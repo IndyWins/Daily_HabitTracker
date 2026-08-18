@@ -18,11 +18,34 @@ struct DailyView: View {
         NavigationStack {
             VStack {
                 
-                // TITLE & WELCOME
+// TITLE & WELCOME
                 
-                Text("Daily")
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Daily")
+                            .modifier(TitleFontModifier())
+                        
+                        Text("Good Morning, \(vm.username) 👋🏼")
+                    }
+                    
+                    Spacer()
+                    
+// ADD NEW HABIT BUTTON NAVIGATION
+                    
+                    NavigationLink {
+                        // Add New Habit View
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .padding()
+                    .fontWeight(.semibold)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(50)
+                    
+                }
+                .padding()
                 
-                Text("Good Morning, \(vm.username) 👋🏼")
                 
                 DailyProgressCard(vm:vm)
                 

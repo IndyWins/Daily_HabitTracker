@@ -15,70 +15,73 @@ struct ProgressView: View {
         
         NavigationStack {
             
-            HStack {
-                
-                VStack {
-                    Text("\(currentDayStreak) Day Streak")
+
+            VStack(spacing: 20) {
                     
                 HStack {
-                        Text("\(currentDayStreak)")
-                        Text("🔥")
+                    VStack(alignment: .leading) {
+                        Text("Progress")
+                            .modifier(TitleFontModifier())
                     }
                     
-                    Text("days in a row!")
+                    Spacer()
                     
                 }
                 
-                Spacer()
-                
-                Image(systemName: "star.fill")
-                
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.green.opacity(0.2))
-            .cornerRadius(15)
-            .shadow(color: .primary.opacity(0.4), radius: 6)
-
-            
-            HStack {
-                
-                VStack {
-                    Text("M")
-                    
-                    Image(systemName:"checkmark.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.green)
-                }
-                
-                VStack {
-                    Text("T")
-                    
-                    Image(systemName:"circle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.gray)
-                }
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .cornerRadius(15)
-            
-            
-            // RETURN TO DAILY VIEW NAVIGATION BUTTON
-            
-            NavigationLink {
-                DailyView()
-            } label: {
                 HStack {
-                    Text("Back To Today")
+                    
+                    VStack {
+                        Text("\(currentDayStreak) Day Streak")
+                            .fontWeight(.semibold)
+                        
+                        HStack {
+                            Text("\(currentDayStreak)")
+                                .font(.system(size: 50))
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color.green)
+                            Text("🔥")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color.green)
+                        }
+                        
+                        Text("days in a row!")
+                        
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
+                    Image(systemName: "star.fill")
+                    
                 }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(.background)
+                .cornerRadius(15)
+                .shadow(color: .primary.opacity(0.4), radius: 6)
+
+                
+                DayCheckMark()
+                
+                // This Week Card
+                
+                WeeklyCardView()
+                
+                
+                // RETURN TO DAILY VIEW NAVIGATION BUTTON
+                
+                NavigationLink {
+                    DailyView()
+                } label: {
+                    HStack {
+                        Text("Back To Today")
+                    }
+                }
+                .modifier(CustomGreenButton())
+                
             }
-            .modifier(CustomGreenButton())
-            
+            .padding()
         }
     }
 }

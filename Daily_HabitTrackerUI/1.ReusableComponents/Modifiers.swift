@@ -19,3 +19,12 @@ struct CustomGreenButton: ViewModifier {
             .cornerRadius(50)
     }
 }
+
+struct TitleFontModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .fontWeight(.bold)
+    }
+}
+
