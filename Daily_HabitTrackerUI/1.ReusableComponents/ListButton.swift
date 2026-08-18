@@ -45,7 +45,9 @@ struct ListButton: View {
             HStack {
                 // RIGHT SIDE: Tappable circle to toggle completion
                 Button {
-                    task.isCompleted.toggle()
+                    Task {
+                        await onToggleCompletion()
+                    }
                 } label: {
                     Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                         .resizable()
@@ -61,7 +63,7 @@ struct ListButton: View {
 }
 
 #Preview {
-    let mockData: Habit = Habit(taskName: "Drink Water", symbol: "drop.fill", isCompleted: false, dateCompleted: nil)
+    let mockData: Habit = Habit(id: UUID(), taskName: "Drink Water", symbol: "drop.fill", isCompleted: false, dateCompleted: nil)
     
     ListButton(task: mockData, onToggleCompletion: { })
 }

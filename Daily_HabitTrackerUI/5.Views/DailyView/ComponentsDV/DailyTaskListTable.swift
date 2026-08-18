@@ -42,7 +42,7 @@ struct DailyTaskListTable: View {
                     ForEach(vm.habits) { task in
                         ListButton(task: task,
                                    onToggleCompletion: {
-                             vm.toggleCompletion(task: task)
+                            await  vm.toggleCompletion(task: task)
                         }
                         )
                     }

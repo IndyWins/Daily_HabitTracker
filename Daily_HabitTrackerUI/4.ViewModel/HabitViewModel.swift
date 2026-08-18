@@ -32,8 +32,11 @@ final class HabitViewModel: ObservableObject {
     }
     
     
-    func toggleCompletion(task: Habit) {
-        task.isCompleted.toggle()
+    func toggleCompletion(task: Habit) async {
+        
+        await service.toggleTask(task)
+        await loadHabits()
+        
     }
    
     
