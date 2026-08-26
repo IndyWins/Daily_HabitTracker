@@ -14,6 +14,7 @@ final class HabitViewModel: ObservableObject {
     private let service: MockHabitService
 
     @Published var habits: [Habit] = []
+    @Published var dailyRecords: [DailyRecord] = []
     
     init(service: MockHabitService) {
         self.service = service
@@ -29,6 +30,10 @@ final class HabitViewModel: ObservableObject {
     
     func loadHabits() async {
         try? habits = await service.fetchHabits()
+    }
+    
+    func loadDailyRecords() async {
+        try? dailyRecords = await service.fetchDailyRecords()
     }
     
     
@@ -66,5 +71,6 @@ final class HabitViewModel: ObservableObject {
         guard totalHabits > 0 else { return 0 }
         return Double(habitsCompleted) / Double(totalHabits)
     }
-    
 }
+
+

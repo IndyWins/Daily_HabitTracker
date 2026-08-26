@@ -9,10 +9,14 @@ import Foundation
 
 protocol HabitService {
     func fetchHabits() async throws -> [Habit]
+    func fetchDailyRecords() async throws -> [DailyRecord]
 }
 
 
 struct MockHabitService: HabitService {
+    
+    
+    // HABIT DATA
     
     private var MockHabits: [Habit] = [
         Habit(id: UUID(), taskName: "Drink Water", symbol: "drop.fill", isCompleted: false, dateCompleted: nil),
@@ -34,4 +38,30 @@ struct MockHabitService: HabitService {
         MockHabits[index].isCompleted.toggle()
         print("Service ToggleTask Function Triggered")
     }
+    
+    // DAILY RECORD DATA
+    
+    private var MockDailyRecords: [DailyRecord] = []
+    
+    
+    // Mock Data Generation for Days Compelted
+    func fetchDailyRecords() async throws -> [DailyRecord] {
+        
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        
+        let completedDays = [0, 1, 2, 3, 5, 6, 8, 9, 10]
+        
+        return (0..<30).map { offset in
+            let date = calendar.date(
+                byAdding: .day,
+                value: -offset,
+                to: today
+            )!
+            
+            return DailyRecord(date: date, dayCompleted: completedDays.contains(offset)
+            )
+        }
+    }
+    
 }
